@@ -3,24 +3,17 @@ Title: "Morphometry"
 Authors: "Fernandes-Filho, Elpídio Inácio; Moquedace, Cássio Marques; Pereira, Luís Flávio; Veloso, Gustavo Vieira; Carvalho Junior, Waldir"
 ---
 
-
 ## Loading packages
 ```{r message=FALSE, warning=FALSE}
 pkg <- c("terra", "dplyr", "sf")
-
 sapply(pkg, require, character.only = T)
 ```
-
-
-
-
 
 ## Cleaning the environment (removing objects and previously loaded packages)
 ```{r}
 rm(list = ls())  
 gc()
 ```
-
 
 ## Loading the DEM and cropping it to the study area
 ```{r}
@@ -31,21 +24,16 @@ ter <- st_read("./vect/ro_territorio.shp") %>%
   filter(territr == "Vale do Jamari") %>% 
   vect()
 
-
 dem <- rast("./predictors/dem/dem.tif") 
-
 
 plot(dem)
 
 plot(ter, add = T)
 ```
 
-
 <p align="center">
 <img src="ro_vj.jpg" width="600">
 </p>
-
-
 
 ```{r}
 dem <- dem %>% 
@@ -62,7 +50,6 @@ plot(dem)
 ## Deriving the morphometric variables
 ```{r eval=FALSE, include=TRUE}
 source("./scripts/s_fmorpho.R")
-
 
 morfometricas_saga(dem = dem,
                    outdir = "./predictors/morpho/",
